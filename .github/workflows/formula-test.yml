@@ -1,0 +1,47 @@
+name: Test Formula
+
+on:
+  pull_request:
+    paths:
+      - 'Formula/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'Formula/**'
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [macos-13, macos-14]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Homebrew
+        run: |
+          brew update
+
+      - name: Tap Repository
+        run: |
+          brew tap zaehorang/tap ${{ github.workspace }}
+
+      - name: Install Formula
+        run: |
+          brew install kps
+
+      - name: Test Installation
+        run: |
+          kps --version
+          kps --help
+
+      - name: Run Brew Test
+        run: |
+          brew test kps
+
+      - name: Audit Formula
+        run: |
+          brew audit --strict kps
