@@ -5,7 +5,7 @@ class Kps < Formula
   license "MIT"
 
   url "https://github.com/zaehorang/KPSTool/releases/download/v0.2.0/kps-v0.2.0.tar.gz"
-  sha256 "6679a23199cc1bfd3fda32b8df55d9c9ed3dc15e8b514109d62135da4969e807"
+  sha256 "d711ff2425dfa321fbd26e97c57e74807c673f8812f38e245d04443b55c86430"
 
   def install
     bin.install "kps"
